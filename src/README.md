@@ -12,3 +12,8 @@ The possiblity of using RXjs exclusively comes to mind, and is enabled with reac
 For Tomodoro, I have decided at the moment to mobx where appropriate
 and rxjs where also appropriate.   hooking into rxjs as a messaging
 broker requires use of useEffect in order to subscribe/unsubscribe only once in the lifecycle, which is ok, and more idiomatic to React than the other alternatives.
+
+## task list and sort function.
+sort is not reactive, "current task" is not reactive.
+This seems to have a clue https://stackoverflow.com/questions/48490703/sort-nested-observable
+Even though it's and Ng SO , the Rxjs is generic.
