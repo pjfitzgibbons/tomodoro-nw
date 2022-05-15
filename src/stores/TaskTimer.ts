@@ -1,4 +1,4 @@
-import { taskStore } from "./Task"
+import { taskStore } from "./TaskStore"
 import { timerStore } from "./Timer"
 
 

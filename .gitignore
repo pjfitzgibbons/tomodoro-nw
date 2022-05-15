@@ -90,3 +90,4 @@ src/dev-extensions/react-devtools/popups/restricted.html
 src/dev-extensions/react-devtools/popups/shared.css
 src/dev-extensions/react-devtools/popups/shared.js
 src/dev-extensions/react-devtools/popups/unminified.html
+tsconfig.json

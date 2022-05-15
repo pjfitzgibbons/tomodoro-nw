@@ -11,7 +11,7 @@
     "@types/jest": "^27.5.0",
     "@types/lodash": "^4.14.182",
     "@types/luxon": "^2.3.2",
-    "@types/node": "^17.0.32",
+    "@types/node": "^17.0.33",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.3",
     "dataclass": "^2.0.0",
@@ -21,7 +21,10 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-rx": "^1.0.1",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.5",
+    "sqlite3": "^5.0.8",
+    "typeorm": "^0.3.6",
     "typescript": "^4.6.4",
     "web-vitals": "^1.0.1"
   },
@@ -29,7 +32,9 @@
     "start": "nw-react-scripts start",
     "build": "nw-react-scripts build",
     "test": "nw-react-scripts test",
-    "eject": "nw-react-scripts eject"
+    "eject": "nw-react-scripts eject",
+    "migrate:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/database/AppDatasource.ts",
+    "migrate:revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/database/AppDatasource.ts"
   },
   "eslintConfig": {
     "extends": [

@@ -1,7 +1,61 @@
 # Tomodoro Development Discussions
 
+# Todos - until dogfooding can track
+- [ ] [timer] - persit timer instances
+- [ ] [task] - edit + persist (Task)
+- [ ] CSS Grid Board [board]
+- [ ] [board] grid container
+- [ ] [board] grid lanes
+- [ ] [board] grid cards
+- [ ] [board] short cards
+- [ ] sqlite storage - task, timer
+- [ ] data lanes + storage
+- [ ] [task] - lane attribute + default
+- [ ] [board] - drag-drop card to lane 
+- [ ] [card] - task display - name only ( postpone save details for later )
+- [ ] [task] - update lane + reactivity
+- [ ] [board] - select short-card per-lane
+- [ ] [timer] - task id per timer instance
+- [ ] [store] - category list
+- [ ] [store] - category color attribute
+- [ ] [card] - select category
+- [ ] [card] - category display (vert - edge color)
+- [ ] [store] - tags - w/ color attribute
+- [ ] [card] - add/remove tags (multi)
+- [ ] [board] - this-week/last-week/- last-month auto-lanes
+- [ ] [board] - prev 2 month auto-lanes
+- [ ] [board] - "more months" lane extend - - prev 6 mo
+- [ ] Task Report [report]
+- [ ] [report] - list tasks by descending - timer date
+- [ ] [report] optional sort by name
+- [ ] [board] - task search (data on - current view)
+- [ ] [report] - search task (all time)
+- [ ] [report] - pom-completed as dots, row-cell display
+- [ ] [report] - 
+- [ ] [card] - task detail
+- [ ] [board] - banner w/ category, tag - lists
+- [ ] [board] - select/highligh category/- task - multi-select - clear-selection
+- [ ] [board] - filter by selected - category/task
+- [ ] [report] - filter by category/task - - re-use banner? - multi-select - clear - filter
+- [ ] [board] - "current task" land - the - task on active timer
+- [ ] [board] - card drag to "current - task" - start timer
+- [ ] [board]/[card] - click card current - timer to pause/resume
+- [ ] [board]/[card] - color card - runnning (green) / pause (amber)
+- [ ] [boadrd]/[card] - drag current back - to WIP - cancel w/ prompt - record - partial POM
+- [ ] [timer] - persist partial timer
+- [ ] [report] - show partial timer (amber dot?)
+- [ ] [Narwahls] - schedule show-n-tel to parents for website current tech - Pat, Fred, 
+- [ ] [Narwahls] - Configure email - collect links to howto setup
+- [ ] [Narwahls] - Configure DNS for email - does this require changing NS to A2Hosting ?
+- [ ] [Narwahls] - Confiure file-share, figure out how to convert from Google Docs
+- [ ] [Narwahls] - convert Google docs
+- [ ] [Narwahls] - remove wish list from website?
+- [ ] [UX] - get color schema ideas - butterflies
+- [ ] [UX] - document possible color schemes - record research links/steps
+- [ ] [UX] - create HTML - UX Design Guide (CSS Scrolling animations)
+
 ## Reactivity vs Observables/Messaging
-Mobx is a popular reactivity lib for object-store on React.  It's missing though easy syntax for a timer (like rxjs interval() ), and it's missing messaging, the pubsub kind.
+Mobx is a popular reactivity lib for object-store on React.  It's missing though an easy syntax for a timer (like rxjs interval() ), and it's missing messaging, the pubsub kind.
 
 There are other messaging libs, like omnibus-rx, which is a pubsub
 built upon rxjs.  This syntax is clunky though, and is not a significant improvement over the boilerplate that's needed to 

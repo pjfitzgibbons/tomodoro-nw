@@ -1,6 +1,6 @@
 import produce from "immer"
 import { DateTime } from "luxon"
-import { taskStore } from "../Task"
+import { taskStore } from "../TaskStore"
 
 beforeEach(() => {
 })

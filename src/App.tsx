@@ -2,7 +2,7 @@ import logo from './assets/Tomatotorrent-256.png';
 import './App.css';
 import { useState } from 'react';
 import { timerStore } from './stores/Timer';
-import { Task, taskStore } from './stores/Task';
+import { Task, taskStore } from './stores/TaskStore';
 import { taskTimerStore } from './stores/TaskTimer';
 import { DateTime } from 'luxon';
 import map from 'lodash/map'

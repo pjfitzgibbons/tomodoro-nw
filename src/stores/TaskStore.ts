@@ -1,26 +1,7 @@
 import { DateTime } from "luxon"
 import { BehaviorSubject } from "rxjs"
+import { Task } from "../database/entities/Task"
 
-console.log({DateTime})
-export class Task {
-    id: number = DateTime.now().toMillis()
-    name: String
-    startDate: DateTime = DateTime.now()
-    endDate: DateTime|null = null
-    constructor(name:string, id?:number, startDate?:DateTime, endDate?:DateTime) {
-        this.name = name
-        if (id) this.id = id
-        if (startDate) this.startDate = startDate
-        if (endDate) this.endDate = endDate
-    }
-
-    static fromJson = (json:any):Task => {
-        console.log("task fromJson", json)
-        const startDate = DateTime.fromISO(json.startDate)
-        const endDate = DateTime.fromISO(json.endDate)
-        return (new Task(json.name, json.id, startDate, endDate))
-    } 
-}
 export class TaskNotFoundError {}
 
 export type TaskMap = Map<number,Task>
