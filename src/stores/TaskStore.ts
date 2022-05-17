@@ -4,7 +4,7 @@ import { Task } from "../database/entities/Task"
 import { taskRepo } from "../database/repositories/TaskRepo"
 export class TaskNotFoundError {}
 
-export type TaskMap = {[key: number]:Task}
+export type TaskMap = {[key: string]:Task}
 
 class ObservableTaskStore {
     tasks = new BehaviorSubject<TaskMap>({})
@@ -20,16 +20,15 @@ class ObservableTaskStore {
     }
     private _tasks = () => this.tasks.getValue()
 
-    addTask(name:string) {
-        const task = new Task({name})
-        taskRepo.insert(task)
+    async  addTask(name:string) {
+        var task:Task = {name, startDate: new Date()}
+        task = await taskRepo.insert(task)
 
-        console.log("addTask", task)
         this.emitTaskUpdate(task)
-        return task.id
+        return task._id
     }
 
-    async completeTask(taskId:number) {
+    async completeTask(taskId:string) {
         const task = this.mappedList[taskId]
         if (!task) {
             console.error("Task not found for taskID ", taskId)
@@ -38,12 +37,12 @@ class ObservableTaskStore {
 
         task.endDate = new Date()
 
-        taskRepo.updateDoc(task)
+        await taskRepo.updateDoc(task)
         this.emitTaskUpdate(task)
     }
 
     emitTaskUpdate(task:Task) {
-        this.mappedList[task.id] = task
+        this.mappedList[task._id!] = task
         this.tasks.next(this.mappedList)
     }
 

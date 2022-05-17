@@ -2,11 +2,13 @@
 export class NotDefinedError extends Error {}
 
 export abstract class EntityBase {
-
+    id:number
     _innerObj: {createdAt?:Date, updatedAt?:Date} = {}
 
     constructor(args:any) {
-        this._innerObj = args
+        const {id, _innerObj} = args
+        this.id = id
+        this._innerObj = _innerObj
         Object.assign(this, args)
     }
 

@@ -16,10 +16,10 @@ abstract class AppRepo {
         }
     }
 
-    datastore = ():Datastore => { throw new NotDefinedError() }
+    datastore = (_:string):Datastore => { throw new NotDefinedError() }
 
     insert = async (newDoc:any) => {
-        return this.db.insert(this.serialize(newDoc))
+        return this.db.insertAsync(this.serialize(newDoc))
     }
 
     update = async (query:any, update:any, options?:Datastore.UpdateOptions|undefined ) => {
@@ -27,7 +27,7 @@ abstract class AppRepo {
     }
 
     updateDoc = async (doc:any) => {
-        return this.db.update({id: doc.id}, {...doc, _innerObj: undefined}, {returnUpdatedDocs: true})
+        return await this.db.updateAsync({_id: doc._id}, doc, {returnUpdatedDocs: true})
     }
 
     find = async (query?:any, projection?:any) => {
@@ -39,8 +39,7 @@ abstract class AppRepo {
     }
 
     findOne = async (query:any, projection?:any) => {
-        const result = await this.db.findOneAsync(query, projection)
-        return this.deserialize(result)
+        return this.db.findOneAsync(query, projection)
     }
 
 
@@ -50,7 +49,10 @@ abstract class AppRepo {
         return Object.assign({}, { ...docOrQuery, _innerObj: undefined } )
     }
     
-    deserialize = (value:any):any => value
+    deserialize = (value:any):any => { 
+        console.log("deserialize", value)   
+        return value
+    }
 }
 
 export default AppRepo

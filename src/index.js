@@ -4,7 +4,7 @@ import './index.css';
 import {App} from './App';
 import reportWebVitals from './reportWebVitals';
 import { timerStore } from './stores/Timer';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function setTimeoutOption() {
   const tomodoroTimeArg = nw.App.argv.find(a => a.match('tomodoroTime'))

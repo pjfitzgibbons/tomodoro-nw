@@ -1,14 +1,21 @@
 # Tomodoro Development Discussions
 
 # Todos - until dogfooding can track
+- [ ] [Narwahls] - schedule show-n-tel to parents for website current tech - Pat, Fred, 
+- [ ] [Narwahls] - Configure email - collect links to howto setup
+- [ ] [Narwahls] - Configure DNS for email - does this require changing NS to A2Hosting ?
+- [ ] [Narwahls] - Confiure file-share, figure out how to convert from Google Docs
+- [ ] [Narwahls] - convert Google docs
+- [ ] [Narwahls] - remove wish list from website?
 - [ ] [timer] - persit timer instances
-- [ ] [task] - edit + persist (Task)
 - [ ] CSS Grid Board [board]
 - [ ] [board] grid container
 - [ ] [board] grid lanes
 - [ ] [board] grid cards
 - [ ] [board] short cards
-- [ ] sqlite storage - task, timer
+- [ ] [store] convert task to task_timer, create model TaskTimer (joined object)
+- [ ] [store] TaskStore read from 'tasks.db', TaskTimer read from 'task_timer.db'
+- [ ] [store] !! figure out how to migrate tables at data load (at read?)
 - [ ] data lanes + storage
 - [ ] [task] - lane attribute + default
 - [ ] [board] - drag-drop card to lane 
@@ -44,15 +51,10 @@
 - [ ] [boadrd]/[card] - drag current back - to WIP - cancel w/ prompt - record - partial POM
 - [ ] [timer] - persist partial timer
 - [ ] [report] - show partial timer (amber dot?)
-- [ ] [Narwahls] - schedule show-n-tel to parents for website current tech - Pat, Fred, 
-- [ ] [Narwahls] - Configure email - collect links to howto setup
-- [ ] [Narwahls] - Configure DNS for email - does this require changing NS to A2Hosting ?
-- [ ] [Narwahls] - Confiure file-share, figure out how to convert from Google Docs
-- [ ] [Narwahls] - convert Google docs
-- [ ] [Narwahls] - remove wish list from website?
 - [ ] [UX] - get color schema ideas - butterflies
 - [ ] [UX] - document possible color schemes - record research links/steps
 - [ ] [UX] - create HTML - UX Design Guide (CSS Scrolling animations)
+- [X] [task] - edit + persist (Task)
 
 ## Reactivity vs Observables/Messaging
 Mobx is a popular reactivity lib for object-store on React.  It's missing though an easy syntax for a timer (like rxjs interval() ), and it's missing messaging, the pubsub kind.

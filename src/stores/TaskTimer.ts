@@ -4,24 +4,24 @@ import { timerStore } from "./Timer"
 
 class TaskTimerStore {
 
-    taskId = 0
+    taskId = ''
     constructor() {
         timerStore.completedObservable.subscribe(this.completedListener)
     }
 
     completedListener = () => {
-        if (this.taskId > 0) {
+        if (this.taskId > '') {
             taskStore.completeTask(this.taskId)
         }
     }
 
-    startNewTimer = (name: string) => {
-        this.taskId = taskStore.addTask(name)
+    startNewTimer = async (name: string) => {
+        this.taskId = (await taskStore.addTask(name))!
         timerStore.start()
     }
 
     togglePause = () => {
-        if (this.taskId === 0) return
+        if (this.taskId === '') return
 
         timerStore.togglePause()
     }

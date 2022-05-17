@@ -1,32 +1,19 @@
 import Datastore from '@seald-io/nedb'
-import { Task } from '../entities/Task'
+import type { Task } from '../entities/Task'
 import AppRepo from '../AppRepo'
 
-class TaskRepo extends AppRepo {
-    datastore = () => new Datastore<Task>(this.datastoreOpts('tasks.db'))
+export class TaskRepo extends AppRepo {
+    datastore = (collectionName:string) => new Datastore<Task>(this.datastoreOpts(collectionName))
 
-    bindValue = (value:any) => new Task(value)
+    // bindValue = (value:any) => new Task(value)
 
     db: Datastore<Task>;
 
-    constructor() {
+    constructor(collectionName:string) {
         super()
-        this.db = this.datastore()
+        this.db = this.datastore(collectionName)
     }
 
-    // serialize = (value:any):any => {
-    //     // allow update to be a subdoc query
-    //     if (!(value instanceof Task)) return value
-    
-    //     return {
-    //         ...Object.assign({}, value),
-    //         startDate: value.startDate.toMillis(),
-    //         endDate: value.endDate ? value.endDate.toMillis() : null
-    //     }
-    // }
-
-    deserialize = (value:any):Task => new Task(value)
-    
 }
 
-export const taskRepo = new TaskRepo()
+export const taskRepo = new TaskRepo('tasks.db')
