@@ -1,7 +1,0 @@
-{"id":1652747466704,"name":"datetest","_startDate":1652747466722,"endDate":null,"createdAt":null,"updatedAt":null,"_id":"4HJ4kJnJa84690SE"}
-{"id":1652753343241,"name":"datetest","startDate":{"$$date":1652753343260},"endDate":null,"createdAt":{"$$date":1652753487996},"updatedAt":null,"_id":"CIiFk6LMqShVTA3F"}
-{"id":1652753310503,"name":"datetest","startDate":{"$$date":1652753310503},"endDate":null,"createdAt":{"$$date":1652753312920},"updatedAt":{"$$date":1652753312920},"_id":"JYV0XfDt0SIaF5po"}
-{"id":1652754904729,"name":"datetest","startDate":{"$$date":1652754904747},"endDate":null,"_id":"OdbsGZ8CLA4n2pcm","createdAt":{"$$date":1652754913432},"updatedAt":{"$$date":1652755044227}}
-{"id":1652753234856,"name":"datetest","startDate":{"$$date":1652753234875},"endDate":null,"createdAt":{"$$date":1652753236862},"updatedAt":{"$$date":1652753236862},"_id":"VNDRLrrJePUtGEND"}
-{"id":1652747618659,"name":"datetest","startDate":{"$$date":1652747618677},"endDate":null,"createdAt":null,"updatedAt":null,"_id":"eB1uBLxrMjZnd4fa"}
-{"id":1652754475605,"name":"datetest","startDate":{"$$date":1652754475605},"endDate":null,"_innerObj":{"name":"datetest"},"_id":"zrYrs64WTx1skRra","createdAt":{"$$date":1652754599502},"updatedAt":{"$$date":1652754599502}}
