@@ -2,14 +2,14 @@ import logo from './assets/Tomatotorrent-256.png';
 import './App.css';
 import { useState } from 'react';
 import { timerStore } from './stores/Timer';
-import { Task, taskStore } from './stores/TaskStore';
+import { taskStore } from './stores/TaskStore';
 import { taskTimerStore } from './stores/TaskTimer';
-import { DateTime } from 'luxon';
 import map from 'lodash/map'
 import sortBy from 'lodash/sortBy'
 import { reverse } from 'lodash';
 
 import { useObservable } from 'react-rx';
+import { Task } from './database/entities/Task';
 
 export const App = () => {
 
@@ -18,20 +18,15 @@ export const App = () => {
   const [taskName, updateTaskName] = useState('InitialTask')
 
   const tasks = useObservable(taskStore.tasks, [])
-  taskStore.tasks.subscribe(console.log)
 
   const sortedTasks = reverse(sortBy(tasks, ['id']))
 
   const currentTask = (): Task | null => {
-    
     const result = sortedTasks[0]
-    console.log("current task", result)
     return result
   }
 
-  const displayTime = () => DateTime.fromMillis(timer)
-    .toFormat('mm:ss.u')
-
+  const displayTime = () => countdownFormatter.format(new Date(timer))
 
   function taskLabelDisplay(): string {
     return timer! > 0 ? 'display' : 'hide'
@@ -45,8 +40,11 @@ export const App = () => {
     taskTimerStore.startNewTimer(taskName)
   }
 
+  const dateFormatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'medium' });
+  const countdownFormatter = new Intl.DateTimeFormat('en-US', { minute:"2-digit", second:"2-digit", fractionalSecondDigits:3 });
+
   function endDateDisplay(task: Task) {
-    return task.endDate?.toISOTime() || "Current"
+    return dateFormatter.format(task.endDate!) || "Current"
   }
 
   return (

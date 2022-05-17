@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon'
+import { now } from 'lodash';
 import { interval, BehaviorSubject, Subscription, Subject } from 'rxjs';
 import { _markRemoved } from '../dev-extensions/react-devtools/build/parseSourceAndMetadata.worker.worker';
 
@@ -12,8 +12,10 @@ class ObservableTimerStore {
 
     timerSource = interval(1000)
 
+    now = () => (new Date()).getTime()
+
     // use to track time-delta from last timerSource event
-    lastTick = DateTime.now().toMillis()
+    lastTick = now()
 
     tickListener: Subscription | null = null
 
@@ -27,13 +29,13 @@ class ObservableTimerStore {
     timerSub: Subscription | null = null
 
     checkCountdown = () => {
-        const nowMillis = DateTime.now().toMillis()
+        const nowMillis = now()
         const delta = nowMillis - this.lastTick
         var _remaining = this.timeRemaining.getValue()
         if (this.running) {
             _remaining -= delta
             if (_remaining < 0.0) {
-                this.completedObservable.next(DateTime.now().toMillis())
+                this.completedObservable.next(now())
                 this.timeRemaining.next(0)
                 this.running = false
             } else {
@@ -49,7 +51,6 @@ class ObservableTimerStore {
         this.tickListener = this.timerSource.subscribe(this.checkCountdown)
     }
 
-    now = DateTime.now
 
     setPomodoroInterval = (seconds: number) => {
         this.pomMilliSeconds = seconds * 1000

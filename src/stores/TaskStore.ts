@@ -1,52 +1,50 @@
-import { DateTime } from "luxon"
+import { keyBy } from "lodash"
 import { BehaviorSubject } from "rxjs"
 import { Task } from "../database/entities/Task"
-
+import { taskRepo } from "../database/repositories/TaskRepo"
 export class TaskNotFoundError {}
 
-export type TaskMap = Map<number,Task>
+export type TaskMap = {[key: number]:Task}
 
 class ObservableTaskStore {
-    tasks = new BehaviorSubject<Task[]>([])
-
+    tasks = new BehaviorSubject<TaskMap>({})
+    mappedList:TaskMap = {}
+    
     constructor() {
-        const tasksJson = window.localStorage.getItem('tomodoro_tasks')
-        const taskList = JSON.parse(tasksJson!).map(Task.fromJson)
-        this.tasks.next(taskList)
-        this.tasks.subscribe(this.persistTasks)
+        (async () => {
+            const taskList = await taskRepo.find()
+            const mappedList = keyBy(taskList, 'id')
+            this.tasks.next(mappedList)
+        })()
+        
     }
     private _tasks = () => this.tasks.getValue()
 
     addTask(name:string) {
-        const task = new Task(name)
-        this.tasks.next([...this._tasks(), task])
+        const task = new Task({name})
+        taskRepo.insert(task)
+
+        console.log("addTask", task)
+        this.emitTaskUpdate(task)
         return task.id
     }
 
-    persistTasks = () => {
-        console.log("persisting tasks")
-        window.localStorage.setItem("tomodoro_tasks", JSON.stringify(this.tasks.getValue()))
+    async completeTask(taskId:number) {
+        const task = this.mappedList[taskId]
+        if (!task) {
+            console.error("Task not found for taskID ", taskId)
+            return
+        }
+
+        task.endDate = new Date()
+
+        taskRepo.updateDoc(task)
+        this.emitTaskUpdate(task)
     }
 
-    /// findTask - retrieve task by id from `tasks`
-    // :return: tuple of index, task - or [-1, TaskNotFoundError]
-    findTask(taskId:number):[number, Task|TaskNotFoundError] {
-        const tIdx = this._tasks().findIndex((t) => t.id === taskId)
-        const task = this._tasks()[tIdx]
-        if (tIdx >= 0) return [tIdx, task]
-
-        return [-1, new TaskNotFoundError()]
-    }
-
-    completeTask(taskId:number) {
-        const _localTasks:Task[] = this._tasks()
-        const [tIdx, task] = this.findTask(taskId)
-        if (task instanceof TaskNotFoundError) return
-
-        task.endDate = DateTime.now()
-
-        _localTasks[tIdx] = task
-        this.tasks.next(_localTasks)
+    emitTaskUpdate(task:Task) {
+        this.mappedList[task.id] = task
+        this.tasks.next(this.mappedList)
     }
 
 }
